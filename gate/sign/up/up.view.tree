@@ -1,0 +1,19 @@
+$org_gate_sign_up $mol_page
+	domain $org_gate_domain
+	title @ \Sign up
+	body /
+		<= Form $mol_form
+			form_fields /
+				<= Name $mol_form_field
+					name <= name_label @ \Login
+					control <= Name_control $mol_string
+						value?val <=> name?val \
+				<= Pass $mol_form_field
+					name <= pass_label @ \Password
+					control <= Pass_control $mol_string
+						value?val <=> pass?val \
+						type \password
+			buttons /
+				<= Submit $mol_button_major
+					title <= submit_label @ \Submit
+					click?val <=> submit_event?val null
