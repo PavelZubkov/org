@@ -2,6 +2,13 @@ $org_gate $mol_book2_catalog
 	domain $org_gate_domain
 	menu_title @ \Gate
 	param \gate
+	User $org_gate_user_page
+		user <= user $org_gate_user
+	Sign_out_menu $mol_list
+		sub /
+			<= Sign_out $mol_button_minor
+				title @ \Sign out
+				click?val <=> sign_out?val null
 	spreads *
 		sign_in <= Sign_in $org_gate_sign_in
 			domain <= domain

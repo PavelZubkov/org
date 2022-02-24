@@ -4,7 +4,8 @@ namespace $.$$ {
 
 		@ $mol_action
 		override submit_event() {
-			this.domain().user().create( this.name() , this.pass() )
+			const user = this.domain().user().create( this.name() , this.pass() )
+			this.domain().sign().in( user )
 		}
 
 	}

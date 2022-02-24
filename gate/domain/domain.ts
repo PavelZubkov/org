@@ -18,6 +18,13 @@ namespace $ {
 			return obj
 		}
 
+		@ $mol_mem
+		sign() {
+			const obj = new $org_gate_sign
+			obj.domain = $mol_const( this )
+			return obj
+		}
+
 	}
 
 }
