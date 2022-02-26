@@ -1,16 +1,15 @@
-$org_gate $mol_book2_catalog
+$org_gate $mol_book2
 	domain $org_gate_domain
-	menu_title @ \Gate
+	title @ \Gate
 	param \gate
-	User $org_gate_user_page
+	User_page $org_gate_user_page
 		user <= user $org_gate_user
-	Sign_out_menu $mol_list
-		sub /
-			<= Sign_out $mol_button_minor
-				title @ \Sign out
+		tools /
+			<= Sign_out $mol_button_typed
 				click?val <=> sign_out?val null
-	spreads *
-		sign_in <= Sign_in $org_gate_sign_in
-			domain <= domain
-		sign_up <= Sign_up $org_gate_sign_up
-			domain <= domain
+				hint @ \Sign out
+				sub / <= Sign_out_icon $mol_icon_logout_variant
+	Sign_in_page $org_gate_sign_in
+	Sign_up_page $org_gate_sign_up
+	pages /
+		<= page $mol_view

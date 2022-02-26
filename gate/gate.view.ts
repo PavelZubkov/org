@@ -7,7 +7,6 @@ namespace $.$$ {
 			return this.domain().sign().user()
 		}
 
-		@ $mol_mem
 		signed() {
 			return !!this.domain().sign().token()
 		}
@@ -16,25 +15,26 @@ namespace $.$$ {
 			this.domain().sign().out()
 		}
 
-		pages() {
-			if ( this.signed() ) {
-				return [
-					this.Menu(),
-					this.User(),
-				]
-			}
-
-			return super.pages()
+		page_param( next?: string ) {
+			return this.$.$mol_state_arg.value( this.param() , next )
 		}
 
-		Links() {
-			if ( this.signed() ) {
-				return this.Sign_out_menu()
+		page() {
+			let val = this.page_param()
+
+			if ( this.signed() && val !== 'user' ) {
+				val = this.page_param( 'user' )
+			} else if ( !this.signed() && val !== 'sign_up' ) {
+				val = this.page_param( 'sign_in' )
 			}
 
-			return super.Links()
-		}
+			switch( val ) {
+				case "user": return this.User_page()
+				case "sign_up": return this.Sign_up_page()
+				default: return this.Sign_in_page()
+			}
 
+		}
 
 		@ $mol_mem
 		store_pull() {

@@ -1,2 +1,5 @@
 $org_gate_sign_in $org_gate_sign_up
-	title @ \Sign in
+	title @ \Gate
+	sign_other_param \sign_up
+	sign_other_label @ \Need account?
+	submit_label @ \Sign in
