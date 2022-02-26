@@ -1,21 +1,27 @@
 $org_gate_sign_up $mol_page
 	domain $org_gate_domain
 	title @ \Gate
+	action null
+	error *
+		required @ \Required
 	body /
 		<= Form $mol_form
 			form_fields /
 				<= Name $mol_form_field
 					name <= name_label @ \Username
+					bid <= name_bid?val \
 					control <= Name_control $mol_string
 						value?val <=> name?val \
 				<= Pass $mol_form_field
 					name <= pass_label @ \Password
+					bid <= pass_bid?val \
 					control <= Pass_control $mol_password
 						value?val <=> pass?val \
 			buttons /
 				<= Submit $mol_button_major
 					title <= submit_label @ \Sign up
 					click?val <=> submit_event?val null
+					enabled <= submit_enabled true
 				<= Sign_other_link $mol_link
 					arg *
 						gate <= sign_other_param \sign_in

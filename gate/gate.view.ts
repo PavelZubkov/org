@@ -41,7 +41,7 @@ namespace $.$$ {
 			console.log('store_pull')
 			const list = this.domain().user().list()
 			for ( const user of list ) {
-				user.name()
+				user.username()
 			}
 		}
 

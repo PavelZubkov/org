@@ -1,4 +1,4 @@
-namespace $ {
+namespace $.$$ {
 
 	export class $org_gate_domain extends $mol_object2 {
 

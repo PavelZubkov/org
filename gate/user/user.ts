@@ -1,6 +1,6 @@
-namespace $ {
+namespace $.$$ {
 
-	export class $org_gate_user_service extends $mol_object2 {
+	export class $org_gate_user_service extends $.$org_gate_user_service {
 
 		domain(): $org_gate_domain {
 			return this.$.$mol_fail(new Error('Not defined'))
@@ -20,7 +20,7 @@ namespace $ {
 
 		@ $mol_mem_key
 		check_exists( name_or_id: string ) {
-			return this.list().some( user => user.id() === name_or_id || user.name() === name_or_id )
+			return this.list().some( user => user.id() === name_or_id || user.username() === name_or_id )
 		}
 
 		@ $mol_mem_key
@@ -32,13 +32,13 @@ namespace $ {
 		}
 
 		find( name: string ) {
-			return this.list().find( user => user.name() === name )
+			return this.list().find( user => user.username() === name )
 		}
 
 		@ $mol_mem_key
 		get( id: string ) {
 			if ( !this.check_exists( id ) ) {
-				return this.$.$mol_fail(new Error('User is not exists'))
+				return this.$.$mol_fail(new Error( this.error().not_exists ))
 			}
 
 			return this.user( id )
@@ -46,14 +46,10 @@ namespace $ {
 
 		@ $mol_action
 		create( name: string , password: string ) {
-			if ( this.check_exists( name ) ) {
-				return this.$.$mol_fail(new Error('Choose another name'))
-			}
-
 			const obj = new $org_gate_user
 			obj.id = $mol_const( $mol_guid() )
 			obj.domain = $mol_const( this.domain() )
-			obj.name( name )
+			obj.username( name )
 			obj.password( password )
 
 			this.list( [ ...this.list() , obj ] )
@@ -78,7 +74,7 @@ namespace $ {
 			return this.domain().state().doc( 'org_gate_user' ).doc( this.id() )
 		}
 
-		name( next?: string ) {
+		username( next?: string ) {
 			return String( this.state().sub( 'name' ).value( next ) ?? '' )
 		}
 

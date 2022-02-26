@@ -1,0 +1,5 @@
+$org_gate_sign $mol_object2
+	error *
+		wrong_creds @ \Wrong username or password
+		wrong_name @ \Choose another name
+		wrong_pass @ \Minimum 8 characters

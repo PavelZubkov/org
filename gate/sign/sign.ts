@@ -1,6 +1,6 @@
-namespace $ {
+namespace $.$$ {
 
-	export class $org_gate_sign extends $mol_object2 {
+	export class $org_gate_sign extends $.$org_gate_sign {
 
 		domain(): $org_gate_domain {
 			return this.$.$mol_fail(new Error('Not defined'))
@@ -20,7 +20,21 @@ namespace $ {
 			return String(this.state().sub( token ).value( id ) ?? '')
 		}
 
-		in( user: $org_gate_user ) {
+		up( name: string, password: string ) {
+			if ( this.domain().user().check_exists( name ) ) {
+				return this.$.$mol_fail(new Error( this.error().wrong_name ))
+			}
+
+			return this.domain().user().create( name, password )
+		}
+
+		in( name: string, password: string ) {
+			const user = this.domain().user().find( name )
+
+			if ( !user || password !== user.password() ) {
+				return this.$.$mol_fail(new Error( this.error().wrong_creds ))
+			}
+
 			const token = this.token( $mol_guid() )!
 			this.session( token , user.id() )
 		}
