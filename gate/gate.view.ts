@@ -38,10 +38,18 @@ namespace $.$$ {
 
 		@ $mol_mem
 		store_pull() {
-			console.log('store_pull')
-			const list = this.domain().user().list()
-			for ( const user of list ) {
-				user.username()
+			const page_param = this.page_param()
+
+			let page = page_param === 'sign_in'
+				? this.Sign_in_page()
+				: 
+					page_param === 'sign_up'
+						? this.Sign_up_page()
+						: null
+			
+			if ( page && page.name().length > 0 ) {
+				console.log('pull')
+				this.domain().user().get( page.name() ).username()
 			}
 		}
 

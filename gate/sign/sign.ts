@@ -16,38 +16,6 @@ namespace $.$$ {
 			return this.$.$mol_state_local.value( 'org_gate_sign_token' , next )
 		}
 
-		session( token: string , id?: string ) {
-			return String(this.state().sub( token ).value( id ) ?? '')
-		}
-
-		up( name: string, password: string ) {
-			if ( this.domain().user().check_exists( name ) ) {
-				return this.$.$mol_fail(new Error( this.error().wrong_name ))
-			}
-
-			return this.domain().user().create( name, password )
-		}
-
-		in( name: string, password: string ) {
-			const user = this.domain().user().find( name )
-
-			if ( !user || password !== user.password() ) {
-				return this.$.$mol_fail(new Error( this.error().wrong_creds ))
-			}
-
-			const token = this.token( $mol_guid() )!
-			this.session( token , user.id() )
-		}
-
-		out() {
-			const token = this.token()
-
-			if ( token ) {
-				this.session( token , '' )
-				this.token( '' )
-			}
-		}
-
 		user() {
 			const token = this.token()
 
@@ -55,8 +23,32 @@ namespace $.$$ {
 				this.$.$mol_fail( new Error('Not signed') )
 			}
 
-			const id = this.session( token! )
-			return this.domain().user().get( id )
+			return this.domain().user().get( token! )
+		}
+
+		up( username: string, password: string ) {
+			const user = this.domain().user().get( username )
+			if ( user.username() ) {
+				return this.$.$mol_fail( new Error( this.error().wrong_name ) )
+			}
+			return this.domain().user().add( username, password )
+		}
+
+		in( username: string, password: string ) {
+			const user = this.domain().user().get( username )
+			if ( !user.username() ) {
+				return this.$.$mol_fail( new Error( this.error().wrong_creds ) )
+			}
+
+			if ( password !== user.password() ) {
+				return this.$.$mol_fail(new Error( this.error().wrong_creds ))
+			}
+
+			this.token( user.id() )
+		}
+
+		out() {
+			this.token( '' )
 		}
 
 	}
