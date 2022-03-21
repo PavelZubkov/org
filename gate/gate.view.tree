@@ -13,3 +13,4 @@ $org_gate $mol_book2
 	Sign_up_page $org_gate_sign_up
 	pages /
 		<= page $mol_view
+	Placeholder null

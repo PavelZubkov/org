@@ -24,7 +24,6 @@ namespace $.$$ {
 			const obj = this.get( username )
 			obj.username( username )
 			obj.password( password )
-
 			return obj
 		}
 

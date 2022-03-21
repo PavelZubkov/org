@@ -1,18 +1,18 @@
 namespace $ {
 
-	export class $org_staff_member extends $mol_object2 {
+	export class $org_person extends $mol_object2 {
 
 		id(): string {
 			return this.$.$mol_fail('Not defined')
 		}
 
-		domain(): $org_staff_domain {
+		domain(): $org_goal_domain {
 			return this.$.$mol_fail('Not defined')
 		}
 
 		@ $mol_mem
 		state() {
-			return this.domain().state().doc( 'org_staff_member' ).doc( this.id() )
+			return this.domain().state().doc( 'org_goal_person' ).doc( this.id() )
 		}
 
 		first_name( next?: string ) {
@@ -25,6 +25,14 @@ namespace $ {
 
 		email( next?: string ) {
 			return String( this.state().sub( 'email' ).value( next ) ?? '' )
+		}
+
+		bio( next?: string ) {
+			return String( this.state().sub( 'bio' ).value( next ) ?? '' )
+		}
+
+		image( next?: string ) {
+			return String( this.state().sub( 'image' ).value( next ) ?? '' )
 		}
 
 	}

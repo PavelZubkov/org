@@ -1,0 +1,14 @@
+$org_goal_home $mol_page
+	domain $org_goal_domain
+	title @ \Home
+	tools /
+		<= Project_new $mol_button_minor
+			click?val <=> project_create?val null
+			sub / <= Project_new_icon $mol_icon_plus
+	body /
+		<= List $mol_list
+			rows <= rows /
+	Link!id $mol_link
+		arg *
+			project <= project_id!id \
+		sub / <= project_title!id \

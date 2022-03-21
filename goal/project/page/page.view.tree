@@ -1,0 +1,14 @@
+$org_goal_project_page $mol_page
+	project $org_goal_project
+	title <= name?val \
+	text *
+		project_new @ \New project
+	head /
+		<= Title $mol_string
+			value?val <=> name?val
+			hint @ \Click to edit
+		<= Task_add $mol_button_minor
+			click?val <=> task_add?val null
+			sub / <= Task_add_icon $mol_icon_plus
+			hint @ \Add task
+	body /

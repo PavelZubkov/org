@@ -1,0 +1,10 @@
+$org_goal_space_list $mol_page
+	title @ \Space
+	tools /
+		<= Space_new $mol_link
+			arg * space <= space_new_id \
+			hint @ \New space
+			sub / <= New_icon $mol_icon_plus
+	body /
+		<= Hint $mol_paragraph
+			title @ \Select space or create

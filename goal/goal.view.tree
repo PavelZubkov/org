@@ -1,0 +1,20 @@
+$org_goal $mol_book2
+	domain $org_goal_domain
+	title @ \Goal
+	pages /
+		<= Gate $org_gate
+		<= Home $org_goal_home
+			domain <= domain
+		<= Kanban $org_goal_kanban
+			stage_list?val <=> stage_list?val /
+				\Todo
+				\In progress
+				\Done
+			card!id?val <= card!id?val /$mol_view
+	Card!id $mol_view
+		sub /
+			<= card_name!id \
+	Project!id $org_goal_project_page
+		project <= project!id $org_goal_project
+	Task!id $org_goal_task_page
+		task <= task!id $org_goal_task

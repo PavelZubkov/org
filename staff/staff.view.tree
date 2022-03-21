@@ -1,0 +1,5 @@
+$org_staff $mol_book2
+	title \org.Staff
+	pages /
+		<= Test $mol_page
+			body / \Hello

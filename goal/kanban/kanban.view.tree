@@ -1,0 +1,35 @@
+$org_goal_kanban $mol_page
+	title \Kanban
+	stage_list?val /string
+	card!stage?list /$mol_view
+	body / <= stage_drop $mol_drop
+		adopt?transfer <=> transfer_adopt?transfer null
+		receive?obj <=> receive?obj null
+		Sub <= List $mol_list
+			rows <= columns /
+	Stage!id $org_goal_kanban_stage
+		title <= stage_title!id \
+		cards <= stage_cards!id /$org_goal_kanban_card
+		transfer_adopt?transfer <=> transfer_adopt?transfer
+		receive_before?obj <=> receive_before!id?obj null
+	Card!id $org_goal_kanban_card
+		Content <= card_content!id $mol_view
+
+$org_goal_kanban_stage $mol_drag
+	transfer *
+		text/plain <= title
+		text/html \
+		text/uri-list \
+	Sub <= Drop $mol_drop
+		adopt?transfer <=> transfer_adopt?transfer null
+		receive?obj <=> receive_before?obj null
+		Sub <= View $mol_view
+			sub /
+				<= Title $mol_view
+					sub / <= title \
+				<= List $mol_list
+					rows <= cards /$org_goal_kanban_card
+
+$org_goal_kanban_card $mol_view
+	sub /
+		<= Content $mol_view

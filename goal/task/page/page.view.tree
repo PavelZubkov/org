@@ -1,0 +1,24 @@
+$org_goal_task_page $mol_page
+	title <= name?val \
+	task $org_goal_task
+	text *
+		task_new @ \New task
+	head /
+		<= Title $mol_string
+			value?val <=> name?val
+			hint @ \Click to edit
+	body / <= Form $mol_form
+		form_fields /
+			<= Descr $mol_form_field
+				name @ \Description
+				control <= Descr_control $mol_textarea
+					value?val <=> descr?val \
+			<= Created $mol_form_field
+				name @ \Created date
+				Content <= Created_content $mol_view
+					sub / <= created \
+			<= Executor $mol_form_field
+				name @ \Executor
+				control <= Executor_control $mol_select
+					value?val <=> executor?val \
+					dictionary <= executor_dict *

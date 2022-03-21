@@ -1,0 +1,13 @@
+$org_goal_space_page $mol_page
+	title @ \Home
+	body /
+		<= List $mol_list
+			rows /
+				<= Projects_link $mol_link
+					arg *
+						projects \
+					sub / <= projects_link_label @ \Projects
+				<= Members_link $mol_link
+					arg *
+						members \
+					sub / <= members_link_label @ \Members
